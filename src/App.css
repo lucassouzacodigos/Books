@@ -1,0 +1,89 @@
+#root{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  /* background-color: purple; */
+}
+
+.loginBox{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, #4cbce6, white);
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+}
+
+.InputNomeado{
+  height: 20px;
+  border-radius: 10px;
+  padding: 7px;
+  box-shadow: 4px 4px 25px black;
+  border:none;
+  background: white;
+  background-color: white;
+  transition: all 300ms ease;
+}
+
+.InputNomeado:focus{
+  background: linear-gradient(to right, #4cbce6, white);
+  background-color: #4cbce6;
+  border: none;
+  height: 30px;
+}
+
+.tituloLogin{
+  font-weight: 600;
+  color: black;
+  font-size: 50px;
+}
+
+.botao{
+    box-shadow: 4px 4px 25px black;
+    width: 219px;
+    height: 45px;
+    border-radius: 7px;
+    text-align: center;
+    border-width: 1px;
+    border-color: black;
+    margin-top: 20px;
+}
+
+.cadastre{
+  font-width: "bold";
+  cursor: pointer;
+  color: blue;
+  text-decoration-line: underline;
+}
+
+.cadastroBox{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: white;
+  background: linear-gradient(to right, #4cbce6, white);
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.5);
+}
+
+.select{
+  width: 218px;
+  border-radius: 7px;
+  margin-top: 20px;
+  height: 33px;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+  text-align: center;
+}

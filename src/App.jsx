@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css'
 import LoginPage from './Pages/LoginPage'
 import Cadastro from './Pages/Cadastro'
+import { ToastContainer } from 'react-toastify';
 
 
 const router = createBrowserRouter([
@@ -21,7 +22,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer/>
+    </>
+  );
 }
 
 

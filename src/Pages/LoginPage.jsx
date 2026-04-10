@@ -16,16 +16,25 @@ export default function LoginPage() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    const router = useNavigate()
 
 
 
     const login = async () => {
+      
 
       try{
+
       const response = await api.post("/login", {
         email: email,
         password: senha
       })
+      localStorage.setItem("token", response.data.token)
+      setTimeout(() => {
+        router("/")
+      }, 500);
+      
+      
       toast.success(response.data.response, {
           position: "bottom-right",
           autoClose: 1500,

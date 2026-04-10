@@ -5,12 +5,12 @@
 }
 
 .container{
+  flex-direction: column;
   width: 100dvw;
   height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   /* background-color: purple; */
 }
 
@@ -86,4 +86,27 @@
   height: 33px;
   box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
   text-align: center;
+}
+
+.destaque{
+  font-weight: bold;
+}
+
+.navigator{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  background-color: aqua;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+  color: white;
+}
+.navigator:hover{
+  color: black;
+}
+.navigator:active{
+  top:-10px;
+  transform: translateY(3px);
 }

@@ -1,12 +1,14 @@
 import '../App.css'
 import { Link, useNavigate } from "react-router-dom"
-
+import NavBar from '../Components/NavBar'
 
 
 export default function Home(){
 
     return (
         <div className='container'>
+            <NavBar/>
+            
             <div style={{width:"30%",  borderRadius:15, height:"10%", backgroundColor:"blue", fontSize:40, display:"flex", alignItems:"center", justifyContent:"center"}}>HOME</div>
             <p>bem vindo a pagina <span className='destaque'>HOME</span></p>
 

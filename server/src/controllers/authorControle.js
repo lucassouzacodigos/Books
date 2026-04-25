@@ -15,5 +15,11 @@ route.get("/", async (req, res) => {
     res.json({"response": allAuthors})
 })
 
+route.delete("/delete/:id", async (req,res) => {
+    const {id} = req.params
+
+    authorRepository.delete({id: id})
+})
+
 
 export default route

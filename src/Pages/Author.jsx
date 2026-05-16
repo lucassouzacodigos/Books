@@ -11,7 +11,7 @@ export default function Author(){
     const [authors, setAuthors] = useState([])
     const [loading, setLoading] = useState('')
     const [error, setError] = useState('')
-    const [novoNomo, setNovoNome] = useState()
+    const [novoNome, setNovoNome] = useState()
     const [novoNacionalidade, setNovoNacionalidade] = useState()
     const [dataNasc, setDataNasc] = useState()
 
@@ -25,7 +25,6 @@ export default function Author(){
                 setLoading(false)
             }
         }
-        getAuthor()
     
     useEffect(() => {
         getAuthor()
@@ -42,6 +41,7 @@ export default function Author(){
         setNovoNome(author.name)
         setNovoNacionalidade(author.nationality)
         setDataNasc(new Date(author.birthdate).toLocaleDateString("pt-BR"))
+        setSelectedID(author.id)
     }
 
     async function handleExcluir(author){
@@ -58,10 +58,31 @@ export default function Author(){
         await api.delete(`/author/delete/${selectedID}`)
     }
 
+    const criarAutor = async () => {
+        const response = await api.post(`/author/adicionar`, {
+            name: novoNome,
+            birthdate: dataNasc,
+            nationality: novoNacionalidade
+        })
+
+        getAuthor() 
+    }
+
+    const attAutor = async () => {
+        const response = await api.put(`/author/editar`, {
+            id: selectedID,
+            name: novoNome,
+            birthdate: dataNasc,
+            nationality: novoNacionalidade
+        })
+
+        getAuthor()
+    }
+
 
     return(
         
-        <div className='FullPage flex-center' style={{backgroundColor:"white", height:"40%", flexDirection:"column"}}>
+        <div className='FullPage flex-center' style={{backgroundColor:"white", height:"100%", flexDirection:"column"}}>
 
 
             <NavBar/>
@@ -91,8 +112,8 @@ export default function Author(){
                                     <td className='blackborder'>{author.name}</td>
                                     <td className='blackborder'>{author.nationality}</td>
                                     <td className='blackborder'>{new Date(author.birthdate).toLocaleDateString("pt-BR")}</td>
-                                    <td className='blackborder'><button onClick={()=>handleExcluir(author)}>Excluir</button></td>
-                                    <td className='blackborder'><button onClick={()=>handleEditar(author)}>Editar</button></td>
+                                    <td className='blackborder'><button style={{backgroundColor:"red"}} onClick={()=>handleExcluir(author)}>Excluir</button></td>
+                                    <td className='blackborder'><button style={{backgroundColor:"lightblue"}} onClick={()=>handleEditar(author)}>Editar</button></td>
                                 </tr>
                             ))
                         }
@@ -103,35 +124,38 @@ export default function Author(){
 
 
             {aba == "excluir" &&
-            <div className='flex-center' style={{backgroundColor:"white", width:"100dvw", height:"40%"}}>
+            <div className='flex-center' style={{backgroundColor:"white", width:"auto", height:"20%", position:"absolute", top:420, left:0}}>
                 <div className='flex-center' style={{background:"#c22323", width:500, height:500, flexDirection:"column", borderRadius:15}}>
                     <p style={{fontSize:25, fontWeight:"bold"}}>Tem certeza que deseja excluir? {selectedID}</p>
                     <div className='flex-center' style={{flexDirection:"row", width:"100%"}}>
                         <button onClick={deletarAuthor} style={{width:150, marginRight:5}}>Sim</button>
-                        <button style={{width:150}}>Nao</button>
+                        <button onClick={() => setAba('')} style={{width:150}}>Nao</button>
                     </div>
                 </div>
             </div>
             }
 
             {aba == "editar" &&
-            <div className='flex-center' style={{backgroundColor:"white", width:"100dvw", height:"40%"}}>
+            <div className='flex-center' style={{backgroundColor:"white", width:"auto", height:"20%", position:"absolute", top:420, left:0}}>
                 <div className='flex-center' style={{background:"lightblue", width:500, height:500, flexDirection:"column", borderRadius:15, alignItems:"center", justifyContent:"center"}}>
                     <p style={{fontSize:25, fontWeight:"bold"}}>Editar informações</p>
-                    <InputNomeado value={novoNomo} valor={setNovoNome} titulo="Nome" largura={250}/>
+                    <InputNomeado value={novoNome} valor={setNovoNome} titulo="Nome" largura={250}/>
                     <InputNomeado value={novoNacionalidade} valor={setNovoNacionalidade} titulo="Nacionalidade" largura={250} />
                     <InputNomeado value={dataNasc} valor={setDataNasc} titulo="Data de nasc" largura={250} />
+
+                    <button onClick={attAutor}>atualizar</button>
                 </div>
             </div>
             }
 
             {aba == "criar" &&
-            <div className='flex-center' style={{backgroundColor:"white", width:"100dvw", height:"40%"}}>
-                <div className='flex-center' style={{background:"lightgreen", width:500, height:500, flexDirection:"column", borderRadius:15}}>
+            <div className='flex-center' style={{backgroundColor:"white", width:"auto", height:"20%", position:"absolute", top:420, left:0}}>
+                <div className='flex-center' style={{background:"lightgreen", width:500, height:600, flexDirection:"column", borderRadius:15}}>
                     <p style={{fontSize:25, fontWeight:"bold", color:"black"}}>Criar novo autor</p>
                     <InputNomeado valor={setNovoNome} titulo="Nome" largura={250}/>
                     <InputNomeado valor={setNovoNacionalidade} titulo="Nacionalidade" largura={250} />
                     <InputNomeado valor={setDataNasc} titulo="Data de nasc" largura={250} />
+                    <button onClick={criarAutor}>Salvar novo Autor</button>
                 </div>
             </div>
             }

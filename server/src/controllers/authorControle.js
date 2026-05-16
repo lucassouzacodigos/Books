@@ -21,5 +21,23 @@ route.delete("/delete/:id", async (req,res) => {
     authorRepository.delete({id: id})
 })
 
+route.post("/adicionar", async (req,res) => {
+    const {name, birthdate, nationality} = req.body
+
+    const autor = authorRepository.create({name, birthdate, nationality})
+    await authorRepository.save(autor)
+
+    res.json({"response": "Autor salvo"})
+})
+
+route.put("/editar",async  (req,res) => {
+    const {name, birthdate, nationality, id} = req.body
+
+    const attautor = authorRepository.create({name, birthdate, nationality})
+    await authorRepository.update({id}, attautor)
+
+    res.json({"response": "Edicao salva"})
+})
+
 
 export default route

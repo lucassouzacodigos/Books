@@ -11,6 +11,7 @@ import Admin from './Pages/Admin'
 import Home from './Pages/Home'
 import Author from './Pages/Author'
 import NavBar from './Components/NavBar'
+import Perfil from './Pages/Perfil'
 import UsuarioComum from './Pages/UsuarioComum'
 import ProtectedRouter from './helpers/protectedRouter';
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
@@ -29,6 +30,7 @@ function App() {
           <Route path='/usuariocomum' element={<UsuarioComum/>} />
           <Route path='/cadastro' element={<Cadastro/>} />
           <Route path='/login' element={<LoginPage/>} />
+          <Route path='/perfil' element={<Perfil/>} />
         </Routes>
       </BrowserRouter>
       <ToastContainer/>

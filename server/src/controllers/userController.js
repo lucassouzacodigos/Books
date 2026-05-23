@@ -1,16 +1,27 @@
-     import express from "express";
-     import User from "../entities/user.js";
-     import { AppDataSource } from "../database/data-source.js";
-     import {Like, IsNull} from "typeorm";
-     import {authenticate} from "../utils/jwt.js";
+import express from "express";
+import User from "../entities/user.js";
+import { AppDataSource } from "../database/data-source.js";
+import {Like, IsNull} from "typeorm";
+import {authenticate} from "../utils/jwt.js";
+import profile from "../entities/profile.js";
 
      const route = express.Router();
      const userRepository = AppDataSource.getRepository(User);
+     const profileRepository = AppDataSource.getRepository(profile)
 
      route.get("/",  async (request, response) => {
           const users = await userRepository.findBy({deletedAt: IsNull()});
           return response.status(200).send({"response":users});
      });
+
+     route.get("/profile", authenticate, async (req,res) => {
+          const users = await userRepository.findBy({email: req.user.email})
+          const imageProfile = await profileRepository.findOne({
+               where: {user: users},
+               order: { id: 'DESC'},
+          })
+          return res.status(200).send({users, imageProfile})
+     })
 
      route.get("/:nameFound", async (request, response) => {
           const {nameFound} = request.params;

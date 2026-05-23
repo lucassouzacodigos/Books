@@ -17,6 +17,7 @@ export default function NavBar(){
             <Link to="/" className='navItem' >Home</Link>
             <Link to="/author" className='navItem' >Authors</Link>
             <Link to="/Books" className='navItem' >Books</Link>
+            <Link to="/perfil" className='navItem' >Perfil</Link>
         </div>
     )
 }
